@@ -1,6 +1,5 @@
 package se.kth.iv1350.mystore.model;
 
-// todo ask about this in handledning
 /*
 Maybe this class should contain final static CONSTANTS instead of private final constants.
 There could be possible benefits.
@@ -12,6 +11,14 @@ public class VAT {
     private final double vat1 = 0.06;
     private final double vat2 = 0.12;
     private final double vat3 = 0.25;
+
+    /*
+    public constructor VAT
+    @param null
+    @return VAT
+
+    creates instance of VAT
+     */
     public VAT(){
     }
 

@@ -24,6 +24,15 @@ class ReceiptTest {
         itemTest = new Item(itemDTOTest, 3);
         receiptTest = new Receipt();
     }
+
+    @AfterEach
+    void tearDown() {
+        receiptTest = null;
+        itemTest = null;
+        itemDTOTest = null;
+        dbHandlerTest = null;
+    }
+
     @Test
     void registerNewItem() {
         receiptTest.registerNewItem(itemTest);
@@ -35,12 +44,19 @@ class ReceiptTest {
         assertEquals(expected, foundItemDescription, "The item did not Register properly");
     }
 
-    @AfterEach
-    void tearDown() {
-        receiptTest = null;
-        itemTest = null;
-        itemDTOTest = null;
-        dbHandlerTest = null;
+
+    @Test
+    void registerMultipleItems(){
+        ItemDTO itemDTOTest2 = dbHandlerTest.getItemDTO("11eleven");
+        Item itemTest2 = new Item(itemDTOTest2, 1);
+        receiptTest.registerNewItem(itemTest2);
+        receiptTest.registerNewItem(itemTest);
+        String description1 = receiptTest.getItemDescription("15fifteen");
+        String description2 = receiptTest.getItemDescription("11eleven");
+        String excpected1 = "Apple";
+
+        assertEquals(excpected1, description1, "wrong item was found");
+        assertNotEquals(excpected1, description2, "Wrong item was found");
     }
 
     @Test

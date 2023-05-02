@@ -22,7 +22,7 @@ class ExternalInventoryDatabase {
             type = 2;
         }
         if(itemIdentifier.equals("11eleven")){
-            description = " Harry Potter and the order of the phoenix";
+            description = "Harry Potter and the order of the phoenix";
             identifier = "11eleven";
             price = 99.99375;
             type = 1;

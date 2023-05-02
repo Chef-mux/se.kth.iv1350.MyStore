@@ -14,7 +14,6 @@ public class Sale {
     private VAT vat;
     private double totalPrice;
     private double totalVAT;
-    private double runningTotalIncludingVAT = totalPrice+totalVAT;
     public Sale(VAT vat){
         this.vat = vat;
         this.receipt = new Receipt();
@@ -64,6 +63,7 @@ public class Sale {
     relays information about Item registration.
      */
     public ItemRegistrationInfoDTO createItemRegistrationInfoDTO(String itemIdentifier){
+        double runningTotalIncludingVAT = (totalPrice + totalVAT);
         return new ItemRegistrationInfoDTO(runningTotalIncludingVAT, receipt, itemIdentifier);
     }
 

@@ -10,12 +10,13 @@ import se.kth.iv1350.mystore.integration.ItemDTO;
 /*
 public class Controller
 Handles calls between layers and keeps them encapsulated from eachother.
-Directs calls and relays data.
+Directs calls from and relays data to View.
  */
 public class Controller {
     private final VAT vat;
     private Sale sale;
     private DbHandler dbHandler;
+    private CashRegister cashRegister;
 
     /*
     public constructor Controller
@@ -25,8 +26,9 @@ public class Controller {
     Creates a Controller instance
      */
     public Controller(CashRegister cashRegister){
-       dbHandler = new DbHandler();
-       vat = new VAT();
+        this.cashRegister = cashRegister;
+        dbHandler = new DbHandler();
+        vat = new VAT();
     }
 
     /*

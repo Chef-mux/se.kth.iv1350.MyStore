@@ -21,7 +21,7 @@ class Receipt {
                 return item;
             }
         }
-        return null;
+        return null; // todo exception here
     }
     boolean itemAlreadyRegistered(String itemIdentifier){
         boolean found = false;
