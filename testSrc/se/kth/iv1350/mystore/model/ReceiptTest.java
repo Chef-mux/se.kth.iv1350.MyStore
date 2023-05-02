@@ -1,0 +1,62 @@
+package se.kth.iv1350.mystore.model;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+
+import se.kth.iv1350.mystore.integration.DbHandler;
+import se.kth.iv1350.mystore.integration.ItemDTO;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class ReceiptTest {
+
+    private DbHandler dbHandlerTest;
+    private ItemDTO itemDTOTest;
+    private Item itemTest;
+    private Receipt receiptTest;
+
+    @BeforeEach
+    void setUp() {
+        dbHandlerTest = new DbHandler();
+        itemDTOTest = dbHandlerTest.getItemDTO("15fifteen");
+        itemTest = new Item(itemDTOTest, 3);
+        receiptTest = new Receipt();
+    }
+    @Test
+    void registerNewItem() {
+        receiptTest.registerNewItem(itemTest);
+        String foundItemDescription = receiptTest.getItemDescription("15fifteen");
+        String expected = "Apple";
+        int foundItemQuantity = receiptTest.getItemQuantity("15fifteen");
+        int expectedQuantity = 3;
+        assertEquals(expectedQuantity,foundItemQuantity, " Quantity did not register properly");
+        assertEquals(expected, foundItemDescription, "The item did not Register properly");
+    }
+
+    @AfterEach
+    void tearDown() {
+        receiptTest = null;
+        itemTest = null;
+        itemDTOTest = null;
+        dbHandlerTest = null;
+    }
+
+    @Test
+    void itemAlreadyRegistered() {
+        receiptTest.registerNewItem(itemTest);
+        boolean excpected = true;
+        boolean foundItem = receiptTest.itemAlreadyRegistered("15fifteen");
+        assertEquals(excpected, foundItem, "Registered item could not be located");
+    }
+
+    @Test
+    void updateItemQuantity() {
+        receiptTest.registerNewItem(itemTest);
+        receiptTest.updateItemQuantity("15fifteen", 4);
+        int excpected = 7;
+        int foundQuantity = receiptTest.getItemQuantity("15fifteen");
+        assertEquals(excpected, foundQuantity, "Quantity is calculated falsly");
+    }
+}
