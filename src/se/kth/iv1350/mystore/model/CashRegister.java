@@ -2,6 +2,7 @@ package se.kth.iv1350.mystore.model;
 
 import se.kth.iv1350.mystore.view.PaymentDTO;
 
+
 /*
 public class CashRegister
 Stores balance
@@ -34,7 +35,7 @@ public class CashRegister {
     calls to update internal Balance
      */
     public ChangeDTO calculateChange(PaymentDTO payment) {
-        double change = payment.getPayment() - totalPriceToPayIncludingVAT;
+        double change = (payment.getPayment() - totalPriceToPayIncludingVAT);
         ChangeDTO changeDTO = new ChangeDTO(change);
         updateBalance(payment, changeDTO);
         return changeDTO;

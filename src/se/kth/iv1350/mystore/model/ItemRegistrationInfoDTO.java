@@ -1,5 +1,6 @@
 package se.kth.iv1350.mystore.model;
 
+
 /*
 public class ItemRegistrationInfoDTO
 Carries information necessary for view after registration of an item
@@ -7,12 +8,12 @@ Carries information necessary for view after registration of an item
 public class ItemRegistrationInfoDTO {
 
     private final double totalPriceToPay;
-    private final String ItemName;
+    private final String itemName;
     private final int amount;
     ItemRegistrationInfoDTO(double totalPriceToPay, Receipt receipt, String itemIdentifier){
 
         this.totalPriceToPay = totalPriceToPay;
-        this.ItemName = receipt.getItemDescription(itemIdentifier);
+        this.itemName = receipt.getItemDescription(itemIdentifier);
         this.amount = receipt.getItemQuantity(itemIdentifier);
     }
 
@@ -21,7 +22,7 @@ public class ItemRegistrationInfoDTO {
     }
 
     public String getItemName() {
-        return ItemName;
+        return itemName;
     }
 
     public int getAmount() {

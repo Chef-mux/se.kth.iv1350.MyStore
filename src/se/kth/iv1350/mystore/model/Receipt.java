@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 class Receipt {
-    private ArrayList <Item> registeredItems;
+    private final ArrayList <Item> registeredItems;
     private PaymentDTO payment;
     private ChangeDTO change;
 
@@ -28,11 +28,8 @@ class Receipt {
         return null; // todo exception here
     }
     boolean itemAlreadyRegistered(String itemIdentifier){
-        boolean found = false;
+        boolean found = findItem(itemIdentifier) != null;
 
-        if (findItem(itemIdentifier) != null){
-            found = true;
-        }
         return found;
     }
 
@@ -50,7 +47,7 @@ class Receipt {
         this.change = change;
     }
 
-    ReceiptDTO fetchReceiptInfo (double totalPrice, double totalVAT){
+    ReceiptDTO getReceiptInfo(double totalPrice, double totalVAT){
         return new ReceiptDTO(totalPrice, totalVAT, this );
     }
     double getPrice(String itemIdentifier){

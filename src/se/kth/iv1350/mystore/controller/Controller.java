@@ -13,8 +13,8 @@ Directs calls from and relays data to View.
  */
 public class Controller {
     private Sale sale;
-    private DbHandler dbHandler;
-    private CashRegister cashRegister;
+    private final DbHandler dbHandler;
+    private final CashRegister cashRegister;
 
     /*
     public constructor Controller
@@ -109,7 +109,7 @@ public class Controller {
     Returns ReceiptDTO.
      */
     public ReceiptDTO FetchReceiptAndLogSale(){
-        ReceiptDTO receiptDTO = sale.fetchReceiptInfo();
+        ReceiptDTO receiptDTO = sale.getReceiptInfo();
         dbHandler.updateDatabasesAndLogSale(receiptDTO);
         return receiptDTO;
     }

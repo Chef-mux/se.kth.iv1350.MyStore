@@ -29,8 +29,8 @@ public class ReceiptDTO {
         change = receipt.getChange();
 
 
-        String toBeReceipt = "     MyStore" + "\n" + "  Somstreet 33" + "\n" + "  " +
-                            time + "\n" + "  " +  date + "\n" +"\n" +
+        String toBeReceipt = "          MyStore" + "\n" + "       Somestreet 33" + "\n" + "       " +
+                            time + "\n" + "       " +  date + "\n" +"\n" +
                             "---------------------------------------------------------" + "\n";
         for (Item item: registeredItems) {
             toBeReceipt += item.getItemQuantity() +" "+ item.getItemDescription() +

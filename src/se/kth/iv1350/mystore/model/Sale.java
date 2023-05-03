@@ -1,6 +1,5 @@
 package se.kth.iv1350.mystore.model;
 
-import javafx.scene.control.TextFormatter;
 import se.kth.iv1350.mystore.integration.ItemDTO;
 import se.kth.iv1350.mystore.view.PaymentDTO;
 
@@ -12,8 +11,8 @@ calculates running total
  */
 public class Sale {
 
-    private Receipt receipt;
-    private VAT vat;
+    private final Receipt receipt;
+    private final VAT vat;
     private double totalPrice;
     private double totalVAT;
     public Sale(){
@@ -59,7 +58,8 @@ public class Sale {
 
     }
 
-    /*public method createItemRegistrationInfoDTO
+    /*
+    public method createItemRegistrationInfoDTO
     @param String itemIdentifier
     @return ItemRegistrationInfoDTO
     relays information about Item registration.
@@ -69,6 +69,11 @@ public class Sale {
         return new ItemRegistrationInfoDTO(runningTotalIncludingVAT, receipt, itemIdentifier);
     }
 
+    /*
+    public method fetchEndOfSaleInfo
+    @param void
+    @return Creates and returns EndSaleDTO
+     */
     public EndSaleDTO fetchEndOfSaleInfo (){
         return new EndSaleDTO(totalPrice, totalVAT);
     }
@@ -77,10 +82,9 @@ public class Sale {
         receipt.setPaymentAndChangeInReceipt(payment, change);
     }
 
-    public ReceiptDTO fetchReceiptInfo(){
-        return receipt.fetchReceiptInfo(totalPrice, totalVAT);
+    public ReceiptDTO getReceiptInfo(){
+        return receipt.getReceiptInfo(totalPrice, totalVAT);
     }
-
 
     private Item createItem(ItemDTO itemDTO, int quantity){
         return new Item (itemDTO, quantity);
