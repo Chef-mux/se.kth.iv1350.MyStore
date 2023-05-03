@@ -7,7 +7,6 @@ import se.kth.iv1350.mystore.integration.DbHandler;
 import se.kth.iv1350.mystore.integration.ItemDTO;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.math.*;
 
 class SaleTest {
 
@@ -18,7 +17,7 @@ class SaleTest {
     void setUp() {
         dbHandlerTest = new DbHandler();
         itemDTOTest = dbHandlerTest.getItemDTO("15fifteen");
-        saleTest = new Sale(new VAT());
+        saleTest = new Sale();
     }
 
     @AfterEach

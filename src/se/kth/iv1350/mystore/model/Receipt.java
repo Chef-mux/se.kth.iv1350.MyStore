@@ -1,10 +1,14 @@
 package se.kth.iv1350.mystore.model;
 
+import se.kth.iv1350.mystore.view.PaymentDTO;
+
 import java.util.ArrayList;
 
 
 class Receipt {
     private ArrayList <Item> registeredItems;
+    private PaymentDTO payment;
+    private ChangeDTO change;
 
     /*
     constructor for Receipt
@@ -41,6 +45,14 @@ class Receipt {
         registeredItems.add(item);
     }
 
+    void setPaymentAndChangeInReceipt(PaymentDTO payment, ChangeDTO change) {
+        this.payment = payment;
+        this.change = change;
+    }
+
+    ReceiptDTO fetchReceiptInfo (double totalPrice, double totalVAT){
+        return new ReceiptDTO(totalPrice, totalVAT, this );
+    }
     double getPrice(String itemIdentifier){
         Item item = findItem(itemIdentifier);
         return item.getPrice();
@@ -59,5 +71,16 @@ class Receipt {
     int getItemQuantity(String itemIdentifier){
         Item item = findItem(itemIdentifier);
         return item.getItemQuantity();
+    }
+
+    ArrayList<Item> getRegisteredItems() {
+        return registeredItems;
+    }
+    double getPayment(){
+        return payment.getPayment();
+    }
+
+    double getChange(){
+        return change.getChange();
     }
 }

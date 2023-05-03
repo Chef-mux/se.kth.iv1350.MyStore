@@ -1,5 +1,7 @@
 package se.kth.iv1350.mystore.integration;
 
+import se.kth.iv1350.mystore.model.ReceiptDTO;
+
 /*
 public class DbHandler
 handles calls to external databases
@@ -26,5 +28,15 @@ public class DbHandler {
      */
     public ItemDTO getItemDTO(String itemIdentifier){
         return ExternalInventoryDatabase.getItemDTO(itemIdentifier);
+    }
+
+    /*
+    public method updateDatabasesAndLogSale
+    @param ReceiptDTO
+    @return Void
+
+    relays ReceiptDTO to external databases for logging and updates.
+     */
+    public void updateDatabasesAndLogSale(ReceiptDTO receiptDTO){
     }
 }

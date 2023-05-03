@@ -24,7 +24,6 @@ class ControllerTest {
         itemDTOTest = dbHandlerTest.getItemDTO("15fifteen");
         vatTest = new VAT();
         contrTest = new Controller(new CashRegister());
-        contrTest.startNewSale();
     }
 
     @AfterEach
@@ -39,6 +38,7 @@ class ControllerTest {
 
     @Test
     void testRegisterItem() {
+        contrTest.startNewSale();
         ItemRegistrationInfoDTO infoDTO = contrTest.registerItem("11eleven");
         String nameTest = infoDTO.getItemName();
         String expected = "Harry Potter and the order of the phoenix";
@@ -47,9 +47,11 @@ class ControllerTest {
 
     @Test
     void testRegisterItemWithHigherQuantity() {
+        contrTest.startNewSale();
         ItemRegistrationInfoDTO infoDTO = contrTest.registerItem("11eleven", 14);
         String nameTest = infoDTO.getItemName();
         String expected = "Harry Potter and the order of the phoenix";
         assertEquals(expected, nameTest, "any number of things ");
     }
 }
+

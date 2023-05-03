@@ -1,11 +1,10 @@
 package se.kth.iv1350.mystore.controller;
 
-import se.kth.iv1350.mystore.model.CashRegister;
-import se.kth.iv1350.mystore.model.ItemRegistrationInfoDTO;
-import se.kth.iv1350.mystore.model.Sale;
-import se.kth.iv1350.mystore.model.VAT;
+import se.kth.iv1350.mystore.model.*;
+import se.kth.iv1350.mystore.view.PaymentDTO;
 import se.kth.iv1350.mystore.integration.DbHandler;
 import se.kth.iv1350.mystore.integration.ItemDTO;
+
 
 /*
 public class Controller
@@ -13,7 +12,6 @@ Handles calls between layers and keeps them encapsulated from eachother.
 Directs calls from and relays data to View.
  */
 public class Controller {
-    private final VAT vat;
     private Sale sale;
     private DbHandler dbHandler;
     private CashRegister cashRegister;
@@ -28,7 +26,6 @@ public class Controller {
     public Controller(CashRegister cashRegister){
         this.cashRegister = cashRegister;
         dbHandler = new DbHandler();
-        vat = new VAT();
     }
 
     /*
@@ -37,7 +34,7 @@ public class Controller {
     @return none
      */
     public void startNewSale(){
-        this.sale = new Sale(vat);
+        this.sale = new Sale();
     }
 
     /*
@@ -71,4 +68,50 @@ public class Controller {
     public ItemRegistrationInfoDTO registerItem(String itemIdentifier){
         return registerItem(itemIdentifier, 1);
     }
+
+    /*
+    public method endSale
+    @param void
+    @return EndSaleDTO
+
+    Signals end of sale and returns EndSaleDTO
+     */
+    public EndSaleDTO endSale(){
+
+        EndSaleDTO endsSale = sale.fetchEndOfSaleInfo();
+        cashRegister.setTotalPriceToPayIncludingVAT(endsSale);
+        return endsSale;
+    }
+
+    /*
+    public method calculateChangeAndUpdateReceipt
+    @param PaymentDTO
+    @return ChangeDTO
+
+    Relays PaymentDTO to CashRegister for calculating change.
+    Relays ChangeDTO to Sale
+    Returns ChangeDTO
+     */
+    public ChangeDTO calculateChangeAndUpdateReceipt(PaymentDTO payment){
+
+        ChangeDTO change = cashRegister.calculateChange(payment);
+        sale.setPaymentAndChangeInReceipt(payment, change);
+        return change;
+    }
+
+    /*
+    public method FetchReceiptAndLogSale
+    @param viod
+    @return ReceiptDTO
+
+    Signals time to print Receipt.
+    Relays ReceiptDTO to DbHandler.
+    Returns ReceiptDTO.
+     */
+    public ReceiptDTO FetchReceiptAndLogSale(){
+        ReceiptDTO receiptDTO = sale.fetchReceiptInfo();
+        dbHandler.updateDatabasesAndLogSale(receiptDTO);
+        return receiptDTO;
+    }
+
 }

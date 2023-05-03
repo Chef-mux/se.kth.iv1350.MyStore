@@ -24,6 +24,7 @@ public class Main {
     public static void main(String[] args) {
        CashRegister cashRegister = new CashRegister();
        Controller contr = new Controller(cashRegister);
-       new View(contr);
+       View view = new View(contr);
+       view.runSimulation();
   }
 }
