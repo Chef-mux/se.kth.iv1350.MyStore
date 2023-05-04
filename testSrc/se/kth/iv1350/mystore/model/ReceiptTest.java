@@ -53,26 +53,26 @@ class ReceiptTest {
         receiptTest.registerNewItem(itemTest);
         String description1 = receiptTest.getItemDescription("15fifteen");
         String description2 = receiptTest.getItemDescription("11eleven");
-        String excpected1 = "Apple";
+        String expected1 = "Apple";
 
-        assertEquals(excpected1, description1, "wrong item was found");
-        assertNotEquals(excpected1, description2, "Wrong item was found");
+        assertEquals(expected1, description1, "wrong item was found");
+        assertNotEquals(expected1, description2, "Wrong item was found");
     }
 
     @Test
     void itemAlreadyRegistered() {
         receiptTest.registerNewItem(itemTest);
-        boolean excpected = true;
+        boolean expected = true;
         boolean foundItem = receiptTest.itemAlreadyRegistered("15fifteen");
-        assertEquals(excpected, foundItem, "Registered item could not be located");
+        assertEquals(expected, foundItem, "Registered item could not be located");
     }
 
     @Test
     void updateItemQuantity() {
         receiptTest.registerNewItem(itemTest);
         receiptTest.updateItemQuantity("15fifteen", 4);
-        int excpected = 7;
+        int expected = 7;
         int foundQuantity = receiptTest.getItemQuantity("15fifteen");
-        assertEquals(excpected, foundQuantity, "Quantity is calculated falsly");
+        assertEquals(expected, foundQuantity, "Quantity is calculated falsly");
     }
 }

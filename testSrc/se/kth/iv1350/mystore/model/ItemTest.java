@@ -26,9 +26,9 @@ class ItemTest {
     @Test
     void testUpdateQuantity(){
         testitem.updateQuantity(4);
-        int excpectedQuantity = 5;
+        int expectedQuantity = 5;
         int foundQuantity = testitem.getItemQuantity();
 
-        assertEquals(excpectedQuantity, foundQuantity, "Quantity is not calculated correctly");
+        assertEquals(expectedQuantity, foundQuantity, "Quantity is not calculated correctly");
     }
 }

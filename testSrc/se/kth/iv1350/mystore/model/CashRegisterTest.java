@@ -44,7 +44,7 @@ class CashRegisterTest {
         double change = changeDTO.getChange();
         double price = (apple.getPrice()*2);
         price += (price * 0.12);
-        double excpected = 100 - price;
-        assertEquals(excpected, change, "Calculation of change was handled incorrectly");
+        double expected = 100 - price;
+        assertEquals(expected, change, "Calculation of change was handled incorrectly");
     }
 }
