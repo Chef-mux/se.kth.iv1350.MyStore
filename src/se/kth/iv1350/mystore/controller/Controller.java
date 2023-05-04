@@ -111,6 +111,7 @@ public class Controller {
     public ReceiptDTO FetchReceiptAndLogSale(){
         ReceiptDTO receiptDTO = sale.getReceiptInfo();
         dbHandler.updateDatabasesAndLogSale(receiptDTO);
+        sale = null;
         return receiptDTO;
     }
 

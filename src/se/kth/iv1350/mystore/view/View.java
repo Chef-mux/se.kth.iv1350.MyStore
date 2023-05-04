@@ -28,15 +28,18 @@ public class View {
         contr.startNewSale();
         ItemRegistrationInfoDTO itemInfo = contr.registerItem("15fifteen",2);
         System.out.println("Register 2 Apples");
-        System.out.println(itemInfo.getAmount() +" " + itemInfo.getItemName() +"\nRunning total: "+ itemInfo.getTotalPriceToPay() +"kr");
+        System.out.println(itemInfo.getAmount() +" " + itemInfo.getItemName() + "  á "+ itemInfo.getPrice() +
+                "kr" + "\nRunning total: "+ itemInfo.getTotalPriceToPay() +"kr");
         itemInfo = contr.registerItem("15fifteen", 13);
         System.out.println("register 13 more Apples");
         System.out.println();
-        System.out.println(itemInfo.getAmount() +" " + itemInfo.getItemName() +"\nRunning total: "+ itemInfo.getTotalPriceToPay() +"kr");
+        System.out.println(itemInfo.getAmount() +" " + itemInfo.getItemName() + "  á "+ itemInfo.getPrice() +
+                "kr" + "\nRunning total: "+ itemInfo.getTotalPriceToPay() +"kr");
         itemInfo = contr.registerItem("11eleven");
         System.out.println("Register a book");
         System.out.println();
-        System.out.println(itemInfo.getAmount() +" " + itemInfo.getItemName() +"\nRunning total: "+ itemInfo.getTotalPriceToPay() +"kr");
+        System.out.println(itemInfo.getAmount() +" " + itemInfo.getItemName() + "  á "+ itemInfo.getPrice() +
+                "kr" + "\nRunning total: "+ itemInfo.getTotalPriceToPay() +"kr");
 
         EndSaleDTO endSale = contr.endSale();
         System.out.println();
