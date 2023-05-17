@@ -11,7 +11,12 @@ class DbHandlerTest {
 
     @BeforeEach
     void setUp() {
-        itemDTO = ExternalInventoryDatabase.getItemDTO("15fifteen");
+        try {
+            itemDTO = ExternalInventoryDatabase.getItemDTO("15fifteen");
+        }
+        catch (Exception e){
+
+        }
     }
 
     @AfterEach

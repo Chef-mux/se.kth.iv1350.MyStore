@@ -26,8 +26,11 @@ public class DbHandler {
     calls on external systems to deliver information about an item
     with matching identifier.
      */
-    public ItemDTO getItemDTO(String itemIdentifier){
-        return ExternalInventoryDatabase.getItemDTO(itemIdentifier);
+    public ItemDTO getItemDTO(String itemIdentifier) {
+       ItemDTO itemDTO = ExternalInventoryDatabase.getItemDTO(itemIdentifier);
+      // if(itemDTO != null)
+           return itemDTO;
+
     }
 
     /*

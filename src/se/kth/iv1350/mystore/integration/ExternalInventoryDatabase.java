@@ -8,25 +8,29 @@ return a ItemDTO that is NULL, in case the itemIdentifier
 does not match any item in the database.
  */
 class ExternalInventoryDatabase {
-
-    public static ItemDTO getItemDTO(String itemIdentifier){
+   public static ItemDTO getItemDTO(String itemIdentifier) {
         String description;
         String identifier;
         double price;
         int type;
-        if( itemIdentifier.equals("15fifteen"));
+
+
+        if( itemIdentifier.equals("15fifteen"))
         {
             description = "Apple";
             identifier = "15fifteen";
             price = 8.00;
             type = 2;
         }
-        if(itemIdentifier.equals("11eleven")){
+        else if(itemIdentifier.equals("11eleven")){
             description = "Harry Potter and the order of the phoenix";
             identifier = "11eleven";
             price = 99.99375;
             type = 1;
         }
+        else
+            return null;
+
         return new ItemDTO(description, identifier, price, type);
     }
 }

@@ -46,7 +46,7 @@ class ControllerTest {
     }
 
     @Test
-    void testRegisterItemWithHigherQuantity() {
+    void testRegisterItemWithHigherQuantity(){
         contrTest.startNewSale();
         ItemRegistrationInfoDTO infoDTO = contrTest.registerItem("11eleven", 14);
         String nameTest = infoDTO.getItemName();

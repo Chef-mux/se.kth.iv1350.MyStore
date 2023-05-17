@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 class Receipt {
-    private final ArrayList <Item> registeredItems;
+    private  ArrayList <Item> registeredItems;
     private PaymentDTO payment;
     private ChangeDTO change;
 

@@ -43,7 +43,7 @@ public class Controller {
     @param int quantity
     @return instance of ItemRegistrationInfoDTO
      */
-    public ItemRegistrationInfoDTO registerItem(String itemIdentifier, int quantity){
+    public ItemRegistrationInfoDTO registerItem(String itemIdentifier, int quantity) {
        boolean found = sale.itemAlreadyRegistered(itemIdentifier);
        if (found){
          sale.updateItemQuantity(itemIdentifier, quantity);
@@ -65,7 +65,7 @@ public class Controller {
 
     sets default quantity to 1.
      */
-    public ItemRegistrationInfoDTO registerItem(String itemIdentifier){
+    public ItemRegistrationInfoDTO registerItem(String itemIdentifier) {
         return registerItem(itemIdentifier, 1);
     }
 
