@@ -20,8 +20,8 @@ public class ReceiptDTO {
 
 
         registeredItems = receipt.getRegisteredItems();
-        time = java.time.LocalTime.now();
-        date = java.time.LocalDate.now();
+        time = LocalTime.now();
+        date = LocalDate.now();
         this.totalPrice = totalPrice;
         this.totalVAT =  totalVAT;
         sum = this.totalPrice + this.totalVAT;

@@ -26,11 +26,13 @@ public class DbHandler {
     calls on external systems to deliver information about an item
     with matching identifier.
      */
-    public ItemDTO getItemDTO(String itemIdentifier) {
+    public ItemDTO getItemDTO(String itemIdentifier)
+    throws InvalidItemIdentifierException, NoContactWithDatabaseException{
        ItemDTO itemDTO = ExternalInventoryDatabase.getItemDTO(itemIdentifier);
-      // if(itemDTO != null)
+       if(itemDTO != null)
            return itemDTO;
-
+       else
+           throw new InvalidItemIdentifierException("null return from database. ",itemIdentifier);
     }
 
     /*
@@ -40,6 +42,13 @@ public class DbHandler {
 
     relays ReceiptDTO to external databases for logging and updates.
      */
-    public void updateDatabasesAndLogSale(ReceiptDTO receiptDTO){
+    public void updateDatabasesAndLogSale(ReceiptDTO receiptDTO)
+            throws NoContactWithDatabaseException{
+        try{
+            ExternalAccoutningSystem.logSale
+        }
+        catch (NoContactWithDatabaseException e){
+
+        }
     }
 }

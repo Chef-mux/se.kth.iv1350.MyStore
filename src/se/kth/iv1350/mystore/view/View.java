@@ -1,6 +1,8 @@
 package se.kth.iv1350.mystore.view;
 
 import se.kth.iv1350.mystore.controller.Controller;
+import se.kth.iv1350.mystore.integration.InvalidItemIdentifierException;
+import se.kth.iv1350.mystore.integration.NoContactWithDatabaseException;
 import se.kth.iv1350.mystore.model.ChangeDTO;
 import se.kth.iv1350.mystore.model.EndSaleDTO;
 import se.kth.iv1350.mystore.model.ItemRegistrationInfoDTO;
@@ -26,24 +28,51 @@ public class View {
     }
     public void runSimulation() {
         contr.startNewSale();
+        ItemRegistrationInfoDTO itemInfo;
+        try {
+            itemInfo = contr.registerItem("15fifteen", 2);
+            System.out.println("Register 2 Apples");
+            System.out.println(itemInfo.getAmount() + " " + itemInfo.getItemName() + "  á ");
+            System.out.printf("%.2f kr" + "\nRunning total: %.2f\n", itemInfo.getPrice(), itemInfo.getTotalPriceToPay());
+        }
+        catch (InvalidItemIdentifierException e) {
+            System.out.println("The item identifier " + e.getItemIdentifier() +
+                        " did not match any items in the database");
+               }
+        catch (NoContactWithDatabaseException e){
+            System.out.println("Operation failed: "+ e.getDatabase() + " was not accessible at this time");
+        }
 
+        try {
+            itemInfo = contr.registerItem("15fifteen", 13);
+            System.out.println("register 13 more Apples");
+            System.out.println();
+            System.out.println(itemInfo.getAmount() + " " + itemInfo.getItemName() + "  á ");
+            System.out.printf("%.2f kr" + "\nRunning total: %.2f\n", itemInfo.getPrice(), itemInfo.getTotalPriceToPay());
+        }
+        catch (InvalidItemIdentifierException  e){
+            System.out.println("The item identifier "+ e.getItemIdentifier() +
+                    " did not match any items in the database");
+        }
+        catch (NoContactWithDatabaseException e){
+            System.out.println("Operation failed: "+ e.getDatabase() + " was not accessible at this time");
+        }
 
-        ItemRegistrationInfoDTO itemInfo = contr.registerItem("15fifteen", 2);
-        System.out.println("Register 2 Apples");
-        System.out.println(itemInfo.getAmount() + " " + itemInfo.getItemName() + "  á ");
-        System.out.printf("%.2f kr" + "\nRunning total: %.2f\n", itemInfo.getPrice(), itemInfo.getTotalPriceToPay());
+        try {
+            itemInfo = contr.registerItem("11eleven");
+            System.out.println("Register a book");
+            System.out.println();
+            System.out.println(itemInfo.getAmount() + " " + itemInfo.getItemName() + "  á ");
+            System.out.printf("%.2f kr" + "\nRunning total: %.2f\n", itemInfo.getPrice(), itemInfo.getTotalPriceToPay());
+        }
+        catch (InvalidItemIdentifierException e){
+            System.out.println("The item identifier "+ e.getItemIdentifier() +
+                    " did not match any items in the database");
+        }
+        catch (NoContactWithDatabaseException e){
+            System.out.println("Operation failed: "+ e.getDatabase() + " was not accessible at this time");
 
-        itemInfo = contr.registerItem("15fifteen", 13);
-        System.out.println("register 13 more Apples");
-        System.out.println();
-        System.out.println(itemInfo.getAmount() + " " + itemInfo.getItemName() + "  á ");
-        System.out.printf("%.2f kr" + "\nRunning total: %.2f\n", itemInfo.getPrice(), itemInfo.getTotalPriceToPay());
-
-        itemInfo = contr.registerItem("11eleven");
-        System.out.println("Register a book");
-        System.out.println();
-        System.out.println(itemInfo.getAmount() + " " + itemInfo.getItemName() + "  á ");
-        System.out.printf("%.2f kr" + "\nRunning total: %.2f\n", itemInfo.getPrice(), itemInfo.getTotalPriceToPay());
+        }
 
         EndSaleDTO endSale = contr.endSale();
         System.out.println();

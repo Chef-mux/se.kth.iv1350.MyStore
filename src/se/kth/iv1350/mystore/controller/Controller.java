@@ -1,5 +1,7 @@
 package se.kth.iv1350.mystore.controller;
 
+import se.kth.iv1350.mystore.integration.InvalidItemIdentifierException;
+import se.kth.iv1350.mystore.integration.NoContactWithDatabaseException;
 import se.kth.iv1350.mystore.model.*;
 import se.kth.iv1350.mystore.view.PaymentDTO;
 import se.kth.iv1350.mystore.integration.DbHandler;
@@ -43,7 +45,9 @@ public class Controller {
     @param int quantity
     @return instance of ItemRegistrationInfoDTO
      */
-    public ItemRegistrationInfoDTO registerItem(String itemIdentifier, int quantity) {
+    public ItemRegistrationInfoDTO registerItem(String itemIdentifier, int quantity)
+    throws InvalidItemIdentifierException,
+            NoContactWithDatabaseException{
        boolean found = sale.itemAlreadyRegistered(itemIdentifier);
        if (found){
          sale.updateItemQuantity(itemIdentifier, quantity);
@@ -65,7 +69,9 @@ public class Controller {
 
     sets default quantity to 1.
      */
-    public ItemRegistrationInfoDTO registerItem(String itemIdentifier) {
+    public ItemRegistrationInfoDTO registerItem(String itemIdentifier)
+    throws InvalidItemIdentifierException,
+            NoContactWithDatabaseException{
         return registerItem(itemIdentifier, 1);
     }
 
@@ -108,9 +114,11 @@ public class Controller {
     Relays ReceiptDTO to DbHandler.
     Returns ReceiptDTO.
      */
-    public ReceiptDTO FetchReceiptAndLogSale(){
+    public ReceiptDTO FetchReceiptAndLogSale()
+    throws NoContactWithDatabaseException{
         ReceiptDTO receiptDTO = sale.getReceiptInfo();
-        dbHandler.updateDatabasesAndLogSale(receiptDTO);
+            dbHandler.updateDatabasesAndLogSale(receiptDTO);
+
         sale = null;
         return receiptDTO;
     }
