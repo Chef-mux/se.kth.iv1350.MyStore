@@ -2,6 +2,7 @@ package se.kth.iv1350.mystore.view;
 
 import se.kth.iv1350.mystore.controller.Controller;
 import se.kth.iv1350.mystore.integration.InvalidItemIdentifierException;
+import se.kth.iv1350.mystore.integration.NoContactWithDatabaseException;
 import se.kth.iv1350.mystore.model.ChangeDTO;
 import se.kth.iv1350.mystore.model.EndSaleDTO;
 import se.kth.iv1350.mystore.model.ItemRegistrationInfoDTO;
@@ -34,8 +35,12 @@ public class View {
             System.out.println(itemInfo.getAmount() + " " + itemInfo.getItemName() + "  á ");
             System.out.printf("%.2f kr" + "\nRunning total: %.2f\n", itemInfo.getPrice(), itemInfo.getTotalPriceToPay());
         }
-        catch (InvalidItemIdentifierException e){
-            System.out.println("The item identifier "+e.getItemIdentifier() +" did not match any items in the database");
+        catch (InvalidItemIdentifierException e) {
+            System.out.println("The item identifier " + e.getItemIdentifier() +
+                        " did not match any items in the database");
+               }
+        catch (NoContactWithDatabaseException e){
+            System.out.println("Operation failed: "+ e.getDatabase() + " was not accessible at this time");
         }
 
         try {
@@ -45,8 +50,12 @@ public class View {
             System.out.println(itemInfo.getAmount() + " " + itemInfo.getItemName() + "  á ");
             System.out.printf("%.2f kr" + "\nRunning total: %.2f\n", itemInfo.getPrice(), itemInfo.getTotalPriceToPay());
         }
-        catch (InvalidItemIdentifierException e){
-            System.out.println("The item identifier "+e.getItemIdentifier() +" did not match any items in the database");
+        catch (InvalidItemIdentifierException  e){
+            System.out.println("The item identifier "+ e.getItemIdentifier() +
+                    " did not match any items in the database");
+        }
+        catch (NoContactWithDatabaseException e){
+            System.out.println("Operation failed: "+ e.getDatabase() + " was not accessible at this time");
         }
 
         try {
@@ -57,7 +66,12 @@ public class View {
             System.out.printf("%.2f kr" + "\nRunning total: %.2f\n", itemInfo.getPrice(), itemInfo.getTotalPriceToPay());
         }
         catch (InvalidItemIdentifierException e){
-            System.out.println("The item identifier "+e.getItemIdentifier() +" did not match any items in the database");
+            System.out.println("The item identifier "+ e.getItemIdentifier() +
+                    " did not match any items in the database");
+        }
+        catch (NoContactWithDatabaseException e){
+            System.out.println("Operation failed: "+ e.getDatabase() + " was not accessible at this time");
+
         }
 
         EndSaleDTO endSale = contr.endSale();

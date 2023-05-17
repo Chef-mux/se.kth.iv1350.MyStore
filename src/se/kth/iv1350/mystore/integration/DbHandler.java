@@ -27,7 +27,7 @@ public class DbHandler {
     with matching identifier.
      */
     public ItemDTO getItemDTO(String itemIdentifier)
-    throws InvalidItemIdentifierException{
+    throws InvalidItemIdentifierException, NoContactWithDatabaseException{
        ItemDTO itemDTO = ExternalInventoryDatabase.getItemDTO(itemIdentifier);
        if(itemDTO != null)
            return itemDTO;
@@ -42,6 +42,13 @@ public class DbHandler {
 
     relays ReceiptDTO to external databases for logging and updates.
      */
-    public void updateDatabasesAndLogSale(ReceiptDTO receiptDTO){
+    public void updateDatabasesAndLogSale(ReceiptDTO receiptDTO)
+            throws NoContactWithDatabaseException{
+        try{
+            ExternalAccoutningSystem.logSale
+        }
+        catch (NoContactWithDatabaseException e){
+
+        }
     }
 }
