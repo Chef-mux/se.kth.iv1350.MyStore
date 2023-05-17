@@ -1,5 +1,6 @@
 package se.kth.iv1350.mystore.controller;
 
+import se.kth.iv1350.mystore.integration.InvalidItemIdentifierException;
 import se.kth.iv1350.mystore.model.*;
 import se.kth.iv1350.mystore.view.PaymentDTO;
 import se.kth.iv1350.mystore.integration.DbHandler;
@@ -43,7 +44,8 @@ public class Controller {
     @param int quantity
     @return instance of ItemRegistrationInfoDTO
      */
-    public ItemRegistrationInfoDTO registerItem(String itemIdentifier, int quantity) {
+    public ItemRegistrationInfoDTO registerItem(String itemIdentifier, int quantity)
+    throws InvalidItemIdentifierException{
        boolean found = sale.itemAlreadyRegistered(itemIdentifier);
        if (found){
          sale.updateItemQuantity(itemIdentifier, quantity);
@@ -65,7 +67,8 @@ public class Controller {
 
     sets default quantity to 1.
      */
-    public ItemRegistrationInfoDTO registerItem(String itemIdentifier) {
+    public ItemRegistrationInfoDTO registerItem(String itemIdentifier)
+    throws InvalidItemIdentifierException {
         return registerItem(itemIdentifier, 1);
     }
 

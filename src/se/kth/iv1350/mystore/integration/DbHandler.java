@@ -26,11 +26,13 @@ public class DbHandler {
     calls on external systems to deliver information about an item
     with matching identifier.
      */
-    public ItemDTO getItemDTO(String itemIdentifier) {
+    public ItemDTO getItemDTO(String itemIdentifier)
+    throws InvalidItemIdentifierException{
        ItemDTO itemDTO = ExternalInventoryDatabase.getItemDTO(itemIdentifier);
-      // if(itemDTO != null)
+       if(itemDTO != null)
            return itemDTO;
-
+       else
+           throw new InvalidItemIdentifierException("null return from database. ",itemIdentifier);
     }
 
     /*
