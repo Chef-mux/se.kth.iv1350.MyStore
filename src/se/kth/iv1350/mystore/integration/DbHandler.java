@@ -28,11 +28,16 @@ public class DbHandler {
      */
     public ItemDTO getItemDTO(String itemIdentifier)
     throws InvalidItemIdentifierException, NoContactWithDatabaseException{
-       ItemDTO itemDTO = ExternalInventoryDatabase.getItemDTO(itemIdentifier);
-       if(itemDTO != null)
-           return itemDTO;
-       else
-           throw new InvalidItemIdentifierException("null return from database. ",itemIdentifier);
+
+        if (itemIdentifier.equals("exceptionTrigger")){
+            throw new NoContactWithDatabaseException("No contact with ExternalInventoryDatabase");
+        }
+
+        ItemDTO itemDTO = ExternalInventoryDatabase.getItemDTO(itemIdentifier);
+        if(itemDTO != null)
+            return itemDTO;
+        else
+            throw new InvalidItemIdentifierException("null return from database. ",itemIdentifier);
     }
 
     /*
@@ -44,11 +49,9 @@ public class DbHandler {
      */
     public void updateDatabasesAndLogSale(ReceiptDTO receiptDTO)
             throws NoContactWithDatabaseException{
-        try{
-            ExternalAccoutningSystem.logSale
-        }
-        catch (NoContactWithDatabaseException e){
-
-        }
+        throw new NoContactWithDatabaseException("No contact with ExternalAccountingSystem");
     }
+
 }
+
+

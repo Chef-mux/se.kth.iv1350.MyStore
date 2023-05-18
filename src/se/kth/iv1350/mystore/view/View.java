@@ -39,9 +39,6 @@ public class View {
             System.out.println("The item identifier " + e.getItemIdentifier() +
                         " did not match any items in the database");
                }
-        catch (NoContactWithDatabaseException e){
-            System.out.println("Operation failed: "+ e.getDatabase() + " was not accessible at this time");
-        }
 
         try {
             itemInfo = contr.registerItem("15fifteen", 13);
@@ -54,9 +51,6 @@ public class View {
             System.out.println("The item identifier "+ e.getItemIdentifier() +
                     " did not match any items in the database");
         }
-        catch (NoContactWithDatabaseException e){
-            System.out.println("Operation failed: "+ e.getDatabase() + " was not accessible at this time");
-        }
 
         try {
             itemInfo = contr.registerItem("11eleven");
@@ -68,10 +62,6 @@ public class View {
         catch (InvalidItemIdentifierException e){
             System.out.println("The item identifier "+ e.getItemIdentifier() +
                     " did not match any items in the database");
-        }
-        catch (NoContactWithDatabaseException e){
-            System.out.println("Operation failed: "+ e.getDatabase() + " was not accessible at this time");
-
         }
 
         EndSaleDTO endSale = contr.endSale();
