@@ -12,7 +12,7 @@ class ItemTest {
     DbHandler testdbHandler;
 
     @BeforeEach
-    void setUp(){
+    void setUp() throws Exception{
     testdbHandler = new DbHandler();
     testitem = new Item(testdbHandler.getItemDTO("11eleven"),1);
     }

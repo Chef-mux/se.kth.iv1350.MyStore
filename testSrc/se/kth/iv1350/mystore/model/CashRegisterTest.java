@@ -18,7 +18,7 @@ class CashRegisterTest {
     private CashRegister testCashRegister;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception {
         testDbHandler = new DbHandler();
         testSale = new Sale();
         apple = testDbHandler.getItemDTO("15fifteen");

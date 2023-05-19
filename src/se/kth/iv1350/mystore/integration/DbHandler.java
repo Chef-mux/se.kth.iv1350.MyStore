@@ -1,17 +1,18 @@
 package se.kth.iv1350.mystore.integration;
 
+import se.kth.iv1350.mystore.exceptions.InvalidItemIdentifierException;
+import se.kth.iv1350.mystore.exceptions.NoContactWithDatabaseException;
 import se.kth.iv1350.mystore.model.ReceiptDTO;
 
-/*
+/**
 public class DbHandler
 handles calls to external databases
  */
 public class DbHandler {
 
-    /*
+    /**
     public constructor DbHandler
-    @param null
-    @return DbHandler
+     @return DbHandler
 
     creates instance of DbHandler
     */
@@ -19,15 +20,15 @@ public class DbHandler {
 
     }
 
-    /*
+    /**
     public method getItemDTO
-    @param String itemIdentifier
+    @param itemIdentifier itemIdentifier
     @return ItemDTO
     calls on external systems to deliver information about an item
     with matching identifier.
      */
     public ItemDTO getItemDTO(String itemIdentifier)
-    throws InvalidItemIdentifierException, NoContactWithDatabaseException{
+    throws InvalidItemIdentifierException, NoContactWithDatabaseException {
 
         if (itemIdentifier.equals("exceptionTrigger")){
             throw new NoContactWithDatabaseException("No contact with ExternalInventoryDatabase");
@@ -40,9 +41,9 @@ public class DbHandler {
             throw new InvalidItemIdentifierException("null return from database. ",itemIdentifier);
     }
 
-    /*
+    /**
     public method updateDatabasesAndLogSale
-    @param ReceiptDTO
+    @param receiptDTO
     @return Void
 
     relays ReceiptDTO to external databases for logging and updates.

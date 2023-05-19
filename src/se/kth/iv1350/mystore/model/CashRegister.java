@@ -13,11 +13,11 @@ public class CashRegister {
     private double balance;
     private double totalPriceToPayIncludingVAT;
 
-    /*public constructor CashRegister
-    @param null
-    @return CashRegister
-
-    creates instance of CashRegister
+    /**
+     * public constructor CashRegister
+     * @return CashRegister
+     *
+     * creates instance of CashRegister
     */
     public CashRegister(){
     }
@@ -26,9 +26,9 @@ public class CashRegister {
         totalPriceToPayIncludingVAT = endSale.getTotalPriceToPayIncludingVAT();
     }
 
-    /*
+    /**
     public ChangeDTO calculateChange
-    @param PaymentDTO
+    @param payment
     @ChangeDTO
 
     calculates change based on totalPriceToPayIncludingVAT and payment.

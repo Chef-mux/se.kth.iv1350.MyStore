@@ -1,6 +1,6 @@
-package se.kth.iv1350.mystore.integration;
+package se.kth.iv1350.mystore.exceptions;
 
-/*
+/**
 thrown if itemIdentifier does not match
 any item in the Database
  */

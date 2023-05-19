@@ -10,7 +10,7 @@ class Receipt {
     private PaymentDTO payment;
     private ChangeDTO change;
 
-    /*
+    /**
     constructor for Receipt
     when a Receipt is constructed, an ArrayList is
     initiated to be filled later.

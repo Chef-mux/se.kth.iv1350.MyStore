@@ -1,14 +1,14 @@
 package se.kth.iv1350.mystore.view;
 
 import se.kth.iv1350.mystore.controller.Controller;
-import se.kth.iv1350.mystore.integration.InvalidItemIdentifierException;
-import se.kth.iv1350.mystore.integration.NoContactWithDatabaseException;
+import se.kth.iv1350.mystore.exceptions.InvalidItemIdentifierException;
+import se.kth.iv1350.mystore.exceptions.NoContactWithDatabaseException;
 import se.kth.iv1350.mystore.model.ChangeDTO;
 import se.kth.iv1350.mystore.model.EndSaleDTO;
 import se.kth.iv1350.mystore.model.ItemRegistrationInfoDTO;
 import se.kth.iv1350.mystore.model.ReceiptDTO;
 
-/*
+/**
 Public class view
 Representation of the outside interface. this is where calls to
 the program originates
@@ -16,7 +16,7 @@ the program originates
 public class View {
     private final Controller contr;
 
-    /*
+    /**
     public constructor Controller
     @param Controller
     @return View
@@ -39,6 +39,9 @@ public class View {
             System.out.println("The item identifier " + e.getItemIdentifier() +
                         " did not match any items in the database");
                }
+        catch (NoContactWithDatabaseException e){
+            System.out.println("The item could not be registered due to database connectivity issues" );
+        }
 
         try {
             itemInfo = contr.registerItem("15fifteen", 13);
@@ -51,6 +54,9 @@ public class View {
             System.out.println("The item identifier "+ e.getItemIdentifier() +
                     " did not match any items in the database");
         }
+        catch (NoContactWithDatabaseException e) {
+            System.out.println("The item could not be registered due to database connectivity issues");
+        }
 
         try {
             itemInfo = contr.registerItem("11eleven");
@@ -62,6 +68,9 @@ public class View {
         catch (InvalidItemIdentifierException e){
             System.out.println("The item identifier "+ e.getItemIdentifier() +
                     " did not match any items in the database");
+        }
+        catch (NoContactWithDatabaseException e) {
+            System.out.println("The item could not be registered due to database connectivity issues");
         }
 
         EndSaleDTO endSale = contr.endSale();

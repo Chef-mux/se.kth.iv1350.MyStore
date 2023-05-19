@@ -1,26 +1,26 @@
 package se.kth.iv1350.mystore.controller;
 
-import se.kth.iv1350.mystore.integration.InvalidItemIdentifierException;
-import se.kth.iv1350.mystore.integration.NoContactWithDatabaseException;
+import se.kth.iv1350.mystore.exceptions.InvalidItemIdentifierException;
+import se.kth.iv1350.mystore.exceptions.NoContactWithDatabaseException;
 import se.kth.iv1350.mystore.model.*;
 import se.kth.iv1350.mystore.view.PaymentDTO;
 import se.kth.iv1350.mystore.integration.DbHandler;
 import se.kth.iv1350.mystore.integration.ItemDTO;
 
 
-/*
-public class Controller
-Handles calls between layers and keeps them encapsulated from eachother.
-Directs calls from and relays data to View.
+/**
+ * public class Controller
+ * Handles calls between layers and keeps them encapsulated from eachother.
+ * Directs calls from and relays data to View.
  */
 public class Controller {
     private Sale sale;
     private final DbHandler dbHandler;
     private final CashRegister cashRegister;
 
-    /*
+    /**
     public constructor Controller
-    @param CashRegister
+    @param cashRegister
     @return Controller
 
     Creates a Controller instance
@@ -30,19 +30,18 @@ public class Controller {
         dbHandler = new DbHandler();
     }
 
-    /*
+    /**
     Initiates a new Sale class
-    @param none
-    @return none
+     @return none
      */
     public void startNewSale(){
         this.sale = new Sale();
     }
 
-    /*
+    /**
     public method 'registerItem'
-    @param String itemIdentifier
-    @param int quantity
+    @param itemIdentifier itemIdentifier
+    @param quantity quantity
     @return instance of ItemRegistrationInfoDTO
      */
     public ItemRegistrationInfoDTO registerItem(String itemIdentifier, int quantity)
@@ -62,9 +61,9 @@ public class Controller {
         return sale.createItemRegistrationInfoDTO(itemIdentifier);
     }
 
-    /*
+    /**
     public method 'registerItem'
-    @param String itemIdentifier
+    @param itemIdentifier itemIdentifier
     @return instance of ItemRegistrationInfoDTO
 
     sets default quantity to 1.
@@ -75,9 +74,8 @@ public class Controller {
         return registerItem(itemIdentifier, 1);
     }
 
-    /*
+    /**
     public method endSale
-    @param void
     @return EndSaleDTO
 
     Signals end of sale and returns EndSaleDTO
@@ -89,9 +87,9 @@ public class Controller {
         return endsSale;
     }
 
-    /*
+    /**
     public method calculateChangeAndUpdateReceipt
-    @param PaymentDTO
+    @param payment
     @return ChangeDTO
 
     Relays PaymentDTO to CashRegister for calculating change.
@@ -105,9 +103,8 @@ public class Controller {
         return change;
     }
 
-    /*
+    /**
     public method FetchReceiptAndLogSale
-    @param viod
     @return ReceiptDTO
 
     Signals time to print Receipt.

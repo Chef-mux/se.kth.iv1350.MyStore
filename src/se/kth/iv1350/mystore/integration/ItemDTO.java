@@ -1,6 +1,6 @@
 package se.kth.iv1350.mystore.integration;
 
-/*
+/**
 public class ItemDTO
 Carries information about an item
  */

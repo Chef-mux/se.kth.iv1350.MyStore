@@ -3,7 +3,7 @@ package se.kth.iv1350.mystore.model;
 import se.kth.iv1350.mystore.integration.ItemDTO;
 import se.kth.iv1350.mystore.view.PaymentDTO;
 
-/*
+/**
 public class Sale
 Carries information about price and VAT
 calculates running total
@@ -20,9 +20,9 @@ public class Sale {
         this.receipt = new Receipt();
     }
 
-    /*
+    /**
     public method itemAlreadyRegistered
-    @param String itemIdentifier
+    @param itemIdentifier itemIdentifier
     @return Boolean
     works as a question. Is there an Item with this identity already registered?
      */
@@ -30,10 +30,11 @@ public class Sale {
        return receipt.itemAlreadyRegistered(itemIdentifier);
     }
 
-    /*
+    /**
     public method updateItemQuantity
-    @param String itemIdentifier
-    @return void
+     @param itemIdentifier
+     @param quantity
+     @return void
     calls for update on already registered item with a certain quantity
     method also calls to update totalPrice and totalVAT
      */
@@ -42,10 +43,10 @@ public class Sale {
         updateTotalPriceAndTotalVAT(itemIdentifier, quantity);
     }
 
-    /*
+    /**
     public method registerNewItem
-    @param ItemDTO
-    @param int quantity
+    @param itemDTO
+    @param quantity quantity
     @return void
     Initiates a new item to be registered based on parameters.
     also calls for update of totalPrice and totalVAT
@@ -58,9 +59,9 @@ public class Sale {
 
     }
 
-    /*
+    /**
     public method createItemRegistrationInfoDTO
-    @param String itemIdentifier
+    @param itemIdentifier itemIdentifier
     @return ItemRegistrationInfoDTO
     relays information about Item registration.
      */
@@ -69,10 +70,9 @@ public class Sale {
         return new ItemRegistrationInfoDTO(runningTotalIncludingVAT, receipt, itemIdentifier);
     }
 
-    /*
+    /**
     public method fetchEndOfSaleInfo
-    @param void
-    @return Creates and returns EndSaleDTO
+     @return Creates and returns EndSaleDTO
      */
     public EndSaleDTO fetchEndOfSaleInfo (){
         return new EndSaleDTO(totalPrice, totalVAT);

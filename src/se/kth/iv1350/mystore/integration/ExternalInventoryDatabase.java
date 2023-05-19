@@ -1,6 +1,6 @@
 package se.kth.iv1350.mystore.integration;
 
-/*
+/**
 This class is not part of my system.
 this class represents the external inventory database that returns
 an ItemDTO when asked. it would at this point have the option to

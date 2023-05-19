@@ -14,7 +14,7 @@ class SaleTest {
     ItemDTO itemDTOTest;
     Sale saleTest;
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception {
         dbHandlerTest = new DbHandler();
         itemDTOTest = dbHandlerTest.getItemDTO("15fifteen");
         saleTest = new Sale();
@@ -28,7 +28,7 @@ class SaleTest {
     }
 
     @Test
-    void createAndRegisterNewItem() {
+    void createAndRegisterNewItem() throws Exception {
         ItemDTO itemDTOTest2 = dbHandlerTest.getItemDTO("11eleven");
 
         saleTest.registerNewItem(itemDTOTest, 2);

@@ -1,7 +1,7 @@
 package se.kth.iv1350.mystore.model;
 
 
-/*
+/**
 public class ItemRegistrationInfoDTO
 Carries information necessary for view after registration of an item
  */

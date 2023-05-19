@@ -19,7 +19,7 @@ class ControllerTest {
     private VAT vatTest;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception{
         dbHandlerTest = new DbHandler();
         itemDTOTest = dbHandlerTest.getItemDTO("15fifteen");
         vatTest = new VAT();
@@ -37,7 +37,7 @@ class ControllerTest {
     }
 
     @Test
-    void testRegisterItem() {
+    void testRegisterItem() throws Exception {
         contrTest.startNewSale();
         ItemRegistrationInfoDTO infoDTO = contrTest.registerItem("11eleven");
         String nameTest = infoDTO.getItemName();
@@ -46,7 +46,7 @@ class ControllerTest {
     }
 
     @Test
-    void testRegisterItemWithHigherQuantity(){
+    void testRegisterItemWithHigherQuantity() throws Exception{
         contrTest.startNewSale();
         ItemRegistrationInfoDTO infoDTO = contrTest.registerItem("11eleven", 14);
         String nameTest = infoDTO.getItemName();

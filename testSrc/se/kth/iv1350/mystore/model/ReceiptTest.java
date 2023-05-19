@@ -18,7 +18,7 @@ class ReceiptTest {
     private Receipt receiptTest;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception {
         dbHandlerTest = new DbHandler();
         itemDTOTest = dbHandlerTest.getItemDTO("15fifteen");
         itemTest = new Item(itemDTOTest, 3);
@@ -46,7 +46,7 @@ class ReceiptTest {
 
 
     @Test
-    void registerMultipleItems(){
+    void registerMultipleItems() throws Exception{
         ItemDTO itemDTOTest2 = dbHandlerTest.getItemDTO("11eleven");
         Item itemTest2 = new Item(itemDTOTest2, 1);
         receiptTest.registerNewItem(itemTest2);

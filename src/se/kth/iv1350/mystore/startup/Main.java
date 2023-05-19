@@ -6,13 +6,13 @@ import se.kth.iv1350.mystore.controller.Controller;
 import se.kth.iv1350.mystore.model.CashRegister;
 import se.kth.iv1350.mystore.view.View;
 
-/*
+/**
 public class Main
 Starts up the program
  */
 public class Main {
 
-    /*
+    /**
     public static method main
     @param String[]
     @return void
