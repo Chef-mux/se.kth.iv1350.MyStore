@@ -3,6 +3,9 @@ package se.kth.iv1350.mystore.model;
 import se.kth.iv1350.mystore.integration.ItemDTO;
 import se.kth.iv1350.mystore.view.PaymentDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
 public class Sale
 Carries information about price and VAT
@@ -15,9 +18,13 @@ public class Sale {
     private final VAT vat;
     private double totalPrice;
     private double totalVAT;
+    private List <SaleObserver> listOfSaleObservers;
+    private List <TotalRevenueObserver> listOfRevenueObservers;
     public Sale(){
         this.vat = new VAT();
         this.receipt = new Receipt();
+        listOfSaleObservers = new ArrayList<>();
+        listOfRevenueObservers = new ArrayList<>();
     }
 
     /**
@@ -41,6 +48,7 @@ public class Sale {
     public void updateItemQuantity(String itemIdentifier, int quantity){
         receipt.updateItemQuantity(itemIdentifier, quantity);
         updateTotalPriceAndTotalVAT(itemIdentifier, quantity);
+        createItemRegistrationInfoDTO(itemIdentifier);
     }
 
     /**
@@ -56,6 +64,7 @@ public class Sale {
         receipt.registerNewItem(item);
         String itemIdentifier = itemDTO.getItemIdentifier();
         updateTotalPriceAndTotalVAT(itemIdentifier,quantity);
+        createItemRegistrationInfoDTO(itemIdentifier);
 
     }
 
@@ -65,9 +74,10 @@ public class Sale {
     @return ItemRegistrationInfoDTO
     relays information about Item registration.
      */
-    public ItemRegistrationInfoDTO createItemRegistrationInfoDTO(String itemIdentifier){
+    private void createItemRegistrationInfoDTO(String itemIdentifier){
         double runningTotalIncludingVAT = (totalPrice + totalVAT);
-        return new ItemRegistrationInfoDTO(runningTotalIncludingVAT, receipt, itemIdentifier);
+        ItemRegistrationInfoDTO irid = new ItemRegistrationInfoDTO(runningTotalIncludingVAT, receipt, itemIdentifier);
+        notifyObserver(irid);
     }
 
     /**
@@ -78,11 +88,25 @@ public class Sale {
         return new EndSaleDTO(totalPrice, totalVAT);
     }
 
+    /**
+     * Sets payment and change variables int the receipt
+     *
+     * @param payment
+     * @param change
+     */
     public void setPaymentAndChangeInReceipt(PaymentDTO payment, ChangeDTO change){
         receipt.setPaymentAndChangeInReceipt(payment, change);
     }
 
+    /**
+     * returns receiptDTO for caller
+     *
+     * @return ReceiptDTO
+     */
     public ReceiptDTO getReceiptInfo(){
+        for(TotalRevenueObserver observer: listOfRevenueObservers){
+            observer.logRevenue(totalPrice);
+        }
         return receipt.getReceiptInfo(totalPrice, totalVAT);
     }
 
@@ -100,5 +124,21 @@ public class Sale {
         double latestItemVAT = price * vatMultiplier;
         totalVAT = (totalVAT + (latestItemVAT * quantity));
 
+    }
+
+    /**
+     * Add an observer.
+     * @param observer
+     */
+    public void addObserver(SaleObserver observer){
+        listOfSaleObservers.add(observer);
+    }
+    public void addObserver(TotalRevenueObserver observer){
+        listOfRevenueObservers.add(observer);
+    }
+    private void notifyObserver(ItemRegistrationInfoDTO itemRegistrationInfoDTO){
+        for (SaleObserver observer: listOfSaleObservers){
+            observer.newRegisteredItem(itemRegistrationInfoDTO);
+        }
     }
 }

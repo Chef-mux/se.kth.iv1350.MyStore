@@ -3,12 +3,16 @@ package se.kth.iv1350.mystore.integration;
 import se.kth.iv1350.mystore.exceptions.InvalidItemIdentifierException;
 import se.kth.iv1350.mystore.exceptions.NoContactWithDatabaseException;
 import se.kth.iv1350.mystore.model.ReceiptDTO;
+import se.kth.iv1350.mystore.util.Logger;
+
+import java.io.IOException;
 
 /**
 public class DbHandler
 handles calls to external databases
  */
 public class DbHandler {
+    private Logger dbHandlerLogger;
 
     /**
     public constructor DbHandler
@@ -16,8 +20,9 @@ public class DbHandler {
 
     creates instance of DbHandler
     */
-    public DbHandler(){
-
+    public DbHandler()
+    throws IOException{
+        dbHandlerLogger = new Logger();
     }
 
     /**
@@ -30,9 +35,7 @@ public class DbHandler {
     public ItemDTO getItemDTO(String itemIdentifier)
     throws InvalidItemIdentifierException, NoContactWithDatabaseException {
 
-        if (itemIdentifier.equals("exceptionTrigger")){
-            throw new NoContactWithDatabaseException("No contact with ExternalInventoryDatabase");
-        }
+        throwNoContactWithDatabaseException(itemIdentifier);
 
         ItemDTO itemDTO = ExternalInventoryDatabase.getItemDTO(itemIdentifier);
         if(itemDTO != null)
@@ -44,15 +47,22 @@ public class DbHandler {
     /**
     public method updateDatabasesAndLogSale
     @param receiptDTO
-    @return Void
-
-    relays ReceiptDTO to external databases for logging and updates.
      */
     public void updateDatabasesAndLogSale(ReceiptDTO receiptDTO)
             throws NoContactWithDatabaseException{
-        throw new NoContactWithDatabaseException("No contact with ExternalAccountingSystem");
+        try {
+            throw new NoContactWithDatabaseException("No contact with ExternalAccountingSystem");
+        }
+        catch (NoContactWithDatabaseException e){
+            dbHandlerLogger.LogException(e);
+        }
     }
 
+    private void throwNoContactWithDatabaseException(String itemIdentifier) {
+        if (itemIdentifier.equals("exceptionTrigger")) {
+            throw new NoContactWithDatabaseException("No contact with ExternalInventoryDatabase");
+        }
+    }
 }
 
 

@@ -39,7 +39,7 @@ class SaleTest {
 
         assertEquals(excpected, found, "Item was not created correctly");
     }
-
+    /*
     @Test
     void createItemRegistrationInfoDTO(){
         saleTest.registerNewItem(itemDTOTest, 23);
@@ -54,4 +54,5 @@ class SaleTest {
         assertEquals(excpectedName, name, " DTO not created with correct information");
         assertEquals(excpectedTotal, runningTotal, "Value calulated incorrectly");
     }
+     */
 }

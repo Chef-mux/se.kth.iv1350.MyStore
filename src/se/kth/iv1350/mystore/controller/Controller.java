@@ -7,6 +7,8 @@ import se.kth.iv1350.mystore.view.PaymentDTO;
 import se.kth.iv1350.mystore.integration.DbHandler;
 import se.kth.iv1350.mystore.integration.ItemDTO;
 
+import java.io.IOException;
+
 
 /**
  * public class Controller
@@ -25,9 +27,11 @@ public class Controller {
 
     Creates a Controller instance
      */
-    public Controller(CashRegister cashRegister){
+    public Controller(CashRegister cashRegister)
+    throws IOException {
         this.cashRegister = cashRegister;
         dbHandler = new DbHandler();
+
     }
 
     /**
@@ -44,7 +48,7 @@ public class Controller {
     @param quantity quantity
     @return instance of ItemRegistrationInfoDTO
      */
-    public ItemRegistrationInfoDTO registerItem(String itemIdentifier, int quantity)
+    public void registerItem(String itemIdentifier, int quantity)
     throws InvalidItemIdentifierException,
             NoContactWithDatabaseException{
        boolean found = sale.itemAlreadyRegistered(itemIdentifier);
@@ -53,12 +57,8 @@ public class Controller {
        }
        else {
            ItemDTO itemDTO =  dbHandler.getItemDTO(itemIdentifier);
-
-           if(itemDTO != null) {//todo this should not be an if statement but an exception
-               sale.registerNewItem(itemDTO, quantity);
-           }
+           sale.registerNewItem(itemDTO, quantity);
        }
-        return sale.createItemRegistrationInfoDTO(itemIdentifier);
     }
 
     /**
@@ -68,10 +68,10 @@ public class Controller {
 
     sets default quantity to 1.
      */
-    public ItemRegistrationInfoDTO registerItem(String itemIdentifier)
+    public void registerItem(String itemIdentifier)
     throws InvalidItemIdentifierException,
             NoContactWithDatabaseException{
-        return registerItem(itemIdentifier, 1);
+        registerItem(itemIdentifier, 1);
     }
 
     /**
@@ -120,4 +120,15 @@ public class Controller {
         return receiptDTO;
     }
 
+    /**
+     * adds SaleObserver
+     *
+     * @param observer
+     */
+    public void addObserver(SaleObserver observer){
+        sale.addObserver(observer);
+    }
+    public void addObserver(TotalRevenueObserver observer){
+        sale.addObserver(observer);
+    }
 }

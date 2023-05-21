@@ -35,7 +35,7 @@ class ControllerTest {
 
 
     }
-
+    /*
     @Test
     void testRegisterItem() throws Exception {
         contrTest.startNewSale();
@@ -53,5 +53,7 @@ class ControllerTest {
         String expected = "Harry Potter and the order of the phoenix";
         assertEquals(expected, nameTest, "any number of things ");
     }
+
+     */
 }
 

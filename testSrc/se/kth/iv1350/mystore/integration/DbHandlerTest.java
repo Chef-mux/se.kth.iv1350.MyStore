@@ -48,10 +48,6 @@ class DbHandlerTest {
     void testThrownNoContactWithDatabaseException(){
         assertThrows(NoContactWithDatabaseException.class, () ->{
             dbHandlerTest.getItemDTO("exceptionTrigger");},
-                "Exception was not thrown, The ifStatment handling this exception needs redoing");
-    }
-    @Test
-    void testThatExcpetionsContainsWhatIsExcpected(){
-
+                "Exception was not thrown, private method handling this exception needs redoing");
     }
 }

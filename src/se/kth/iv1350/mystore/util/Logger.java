@@ -41,5 +41,3 @@ public class Logger {
     }
 
 }
-
-// todo den här klassen behöver jag förstå bättre
