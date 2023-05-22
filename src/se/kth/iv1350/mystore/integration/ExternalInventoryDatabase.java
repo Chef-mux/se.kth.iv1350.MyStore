@@ -8,6 +8,12 @@ return a ItemDTO that is NULL, in case the itemIdentifier
 does not match any item in the database.
  */
 class ExternalInventoryDatabase {
+
+    /**
+     *
+     * @param itemIdentifier
+     * @return
+     */
    public static ItemDTO getItemDTO(String itemIdentifier) {
         String description;
         String identifier;

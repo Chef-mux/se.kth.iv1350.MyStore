@@ -8,11 +8,20 @@ public class InvalidItemIdentifierException extends Exception {
 
     private String itemIdentifier;
 
+    /**
+     *
+     * @param message
+     * @param itemIdentifier
+     */
     public InvalidItemIdentifierException(String message, String itemIdentifier){
         super(message);
         this.itemIdentifier = itemIdentifier;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getItemIdentifier(){
         return itemIdentifier;
     }

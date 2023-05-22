@@ -6,9 +6,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Class that looks observes revenue
+ */
 class TotalRevenueView implements TotalRevenueObserver {
     private double totalRevenue;
 
+    /**
+     *
+     * @param revenue
+     */
     @Override
     public void logRevenue(double revenue) {
         totalRevenue += revenue;
@@ -21,6 +28,7 @@ class TotalRevenueView implements TotalRevenueObserver {
         logBuilder.append(totalRevenue);
         System.out.println(logBuilder);
     }
+
     private String getTime() {
         LocalDateTime time = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);

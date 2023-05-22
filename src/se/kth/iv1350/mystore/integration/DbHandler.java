@@ -58,6 +58,10 @@ public class DbHandler {
         }
     }
 
+    /**
+     *
+     * @param itemIdentifier
+     */
     private void throwNoContactWithDatabaseException(String itemIdentifier) {
         if (itemIdentifier.equals("exceptionTrigger")) {
             throw new NoContactWithDatabaseException("No contact with ExternalInventoryDatabase");

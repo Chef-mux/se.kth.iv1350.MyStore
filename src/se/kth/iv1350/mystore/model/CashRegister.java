@@ -3,7 +3,7 @@ package se.kth.iv1350.mystore.model;
 import se.kth.iv1350.mystore.view.PaymentDTO;
 
 
-/*
+/**
 public class CashRegister
 Stores balance
 Calculates change
@@ -22,6 +22,10 @@ public class CashRegister {
     public CashRegister(){
     }
 
+    /**
+     *
+     * @param endSale
+     */
     public void setTotalPriceToPayIncludingVAT(EndSaleDTO endSale) {
         totalPriceToPayIncludingVAT = endSale.getTotalPriceToPayIncludingVAT();
     }

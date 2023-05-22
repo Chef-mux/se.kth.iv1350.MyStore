@@ -9,16 +9,27 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Class taht observes revenue and prints to txt file.
+ */
 public class TotalRevenueFileOutput implements TotalRevenueObserver {
     PrintWriter printWriter;
     private static final String LOG_FILE_NAME = "revenueOfMyStore-log.txt";
     private double totalRevenue;
 
+    /**
+     *
+     * @throws IOException
+     */
     public TotalRevenueFileOutput()
     throws IOException {
         printWriter = new PrintWriter(new FileWriter(LOG_FILE_NAME),true);
     }
 
+    /**
+     *
+     * @param revenue
+     */
     @Override
     public void logRevenue (double revenue) {
         totalRevenue += revenue;
@@ -30,7 +41,6 @@ public class TotalRevenueFileOutput implements TotalRevenueObserver {
         logBuilder.append("Total revenue: ");
         logBuilder.append(totalRevenue);
         printWriter.println(logBuilder);
-        printWriter.flush();
     }
 
     private String getTime() {
