@@ -15,22 +15,27 @@ public class DbHandler {
     private Logger dbHandlerLogger;
 
     /**
-    public constructor DbHandler
-     @return DbHandler
-
-    creates instance of DbHandler
-    */
+     * public constructor DbHandler
+     * @throws IOException
+     */
     public DbHandler()
     throws IOException{
         dbHandlerLogger = new Logger();
     }
 
     /**
-    public method getItemDTO
-    @param itemIdentifier itemIdentifier
-    @return ItemDTO
-    calls on external systems to deliver information about an item
-    with matching identifier.
+     * public method getItemDTO
+     * calls on external systems to deliver information about an item
+     * with matching identifier.
+     * @param itemIdentifier
+     * @return  ItemDTO
+     *
+     * InvalidItemIdentifierException is thrown when the database returns null which means
+     * that there was no item in the database with matching identifier.
+     * @throws InvalidItemIdentifierException
+     *
+     * NoContactWithDatabaseException is thrown if external inventory database was not accessible
+     * @throws NoContactWithDatabaseException
      */
     public ItemDTO getItemDTO(String itemIdentifier)
     throws InvalidItemIdentifierException, NoContactWithDatabaseException {
@@ -45,8 +50,11 @@ public class DbHandler {
     }
 
     /**
-    public method updateDatabasesAndLogSale
-    @param receiptDTO
+     * public method updateDatabasesAndLogSale
+     * @param receiptDTO
+     *
+     * NoContactWithDatabaseException is thrown if external accounting system was not accessible
+     * @throws NoContactWithDatabaseException
      */
     public void updateDatabasesAndLogSale(ReceiptDTO receiptDTO)
             throws NoContactWithDatabaseException{
@@ -61,8 +69,12 @@ public class DbHandler {
     /**
      *
      * @param itemIdentifier
+     *
+     * NoContactWithDatabaseException is thrown if external inventory database was not accessible
+     * @throws NoContactWithDatabaseException
      */
-    private void throwNoContactWithDatabaseException(String itemIdentifier) {
+    private void throwNoContactWithDatabaseException(String itemIdentifier)
+    throws NoContactWithDatabaseException {
         if (itemIdentifier.equals("exceptionTrigger")) {
             throw new NoContactWithDatabaseException("No contact with ExternalInventoryDatabase");
         }

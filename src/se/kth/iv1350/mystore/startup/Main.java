@@ -25,6 +25,7 @@ public class Main {
     Controller
     View
     TotalRevenueFileOutput
+     @throws IOException
      */
     public static void main(String[] args)
     throws IOException {

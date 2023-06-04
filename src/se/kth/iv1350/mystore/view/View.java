@@ -10,9 +10,9 @@ import se.kth.iv1350.mystore.util.TotalRevenueFileOutput;
 import java.io.IOException;
 
 /**
-Public class view
-Representation of the outside interface. this is where calls to
-the program originates
+ * Public class view
+ * Representation of the outside interface. this is where calls to
+ * the program originates
  */
 public class View {
     private ItemRegistrationDisplay itemRegistrationDisplay;
@@ -22,11 +22,10 @@ public class View {
     private final Controller contr;
 
     /**
-    public constructor Controller
-    @param contr
-    @return View
-
-    creates instance of View
+     * public constructor Controller
+     * creates instance of View
+     * @param contr
+     * @throws IOException
      */
     public View(Controller contr)
     throws IOException {

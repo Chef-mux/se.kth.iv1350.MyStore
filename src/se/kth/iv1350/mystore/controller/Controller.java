@@ -21,11 +21,9 @@ public class Controller {
     private final CashRegister cashRegister;
 
     /**
-    public constructor Controller
-    @param cashRegister
-    @return Controller
-
-    Creates a Controller instance
+     * public constructor Controller
+     * @param cashRegister
+     * @throws IOException
      */
     public Controller(CashRegister cashRegister)
     throws IOException {
@@ -35,18 +33,23 @@ public class Controller {
     }
 
     /**
-    Initiates a new Sale class
-     @return none
+     * Initiates a new Sale class
      */
     public void startNewSale(){
         this.sale = new Sale();
     }
 
     /**
-    public method 'registerItem'
-    @param itemIdentifier itemIdentifier
-    @param quantity quantity
-    @return instance of ItemRegistrationInfoDTO
+     *
+     * @param itemIdentifier
+     * @param quantity
+     *
+     * InvalidItemIdentifierException is thrown if itemDTO is null which means
+     * that there was no item in the database with matching identifier.
+     * @throws InvalidItemIdentifierException
+     *
+     * NoContactWithDatabaseException is thrown if the External inventory database was not accessible
+     * @throws NoContactWithDatabaseException
      */
     public void registerItem(String itemIdentifier, int quantity)
     throws InvalidItemIdentifierException,
@@ -62,11 +65,15 @@ public class Controller {
     }
 
     /**
-    public method 'registerItem'
-    @param itemIdentifier itemIdentifier
-    @return instance of ItemRegistrationInfoDTO
-
-    sets default quantity to 1.
+     * public method 'registerItem'
+     * sets default quantity to 1.
+     * @param itemIdentifier
+     * InvalidItemIdentifierException is thrown if itemDTO is null which means
+     * that there was no item in the database with matching identifier.
+     * @throws InvalidItemIdentifierException
+     *
+     * NoContactWithDatabaseException is thrown if the External inventory database was not accessible
+     * @throws NoContactWithDatabaseException
      */
     public void registerItem(String itemIdentifier)
     throws InvalidItemIdentifierException,
@@ -75,10 +82,9 @@ public class Controller {
     }
 
     /**
-    public method endSale
-    @return EndSaleDTO
-
-    Signals end of sale and returns EndSaleDTO
+     * public method endSale
+     * Signals end of sale and returns EndSaleDTO
+     * @return EndSaleDTO
      */
     public EndSaleDTO endSale(){
 
@@ -88,13 +94,9 @@ public class Controller {
     }
 
     /**
-    public method calculateChangeAndUpdateReceipt
-    @param payment
-    @return ChangeDTO
-
-    Relays PaymentDTO to CashRegister for calculating change.
-    Relays ChangeDTO to Sale
-    Returns ChangeDTO
+     * public method calculateChangeAndUpdateReceipt
+     * @param payment
+     * @return change
      */
     public ChangeDTO calculateChangeAndUpdateReceipt(PaymentDTO payment){
 
@@ -104,12 +106,11 @@ public class Controller {
     }
 
     /**
-    public method FetchReceiptAndLogSale
-    @return ReceiptDTO
-
-    Signals time to print Receipt.
-    Relays ReceiptDTO to DbHandler.
-    Returns ReceiptDTO.
+     * public method FetchReceiptAndLogSale
+     * @return receiptDTO
+     *
+     * NoContactWithDatabaseException is thrown if the External accounting system was not accessible
+     * @throws NoContactWithDatabaseException
      */
     public ReceiptDTO FetchReceiptAndLogSale()
     throws NoContactWithDatabaseException{
@@ -122,12 +123,16 @@ public class Controller {
 
     /**
      * adds SaleObserver
-     *
      * @param observer
      */
     public void addObserver(SaleObserver observer){
         sale.addObserver(observer);
     }
+
+    /**
+     * adds TotalRevenueObserver
+     * @param observer
+     */
     public void addObserver(TotalRevenueObserver observer){
         sale.addObserver(observer);
     }
